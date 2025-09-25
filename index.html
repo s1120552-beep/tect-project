@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>軟體工程師 | 自動化技術與量化交易</title>
+    <!-- 引入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* 讓 Three.js 畫布覆蓋整個背景 */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: block;
+        }
+
+        /* 主容器樣式 */
+        .main-container {
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* 按鈕hover效果 */
+        .link-button:hover .link-text {
+            transform: scale(1.05);
+        }
+        .link-button:hover .link-icon {
+            transform: scale(1.2);
+        }
+        .link-button:hover {
+            box-shadow: 0 0 20px rgba(107, 114, 128, 0.5);
+        }
+    </style>
+</head>
+<body class="text-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <!-- 動態音波背景畫布 -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- 主容器 -->
+    <div class="main-container w-full max-w-sm mx-auto bg-gray-900 bg-opacity-70 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-2xl border border-gray-700 transform transition-all duration-300 hover:scale-[1.01]">
+        
+        <!-- 個人頭像與標題 -->
+        <div class="flex flex-col items-center space-y-4 mb-8">
+            <div class="relative w-28 h-28 rounded-full overflow-hidden border-4 border-gray-600 shadow-xl">
+                <img src="https://placehold.co/150x150/2d3748/a0aec0?text=Profile" alt="個人頭像" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-blue-500 rounded-full opacity-0 hover:opacity-10 transition-opacity duration-300"></div>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white text-center tracking-wide">
+                您的名字
+            </h1>
+            <p class="text-sm md:text-base text-gray-400 font-medium text-center">
+                軟體工程師 | 自動化技術 | 量化交易
+            </p>
+        </div>
+
+        <!-- 連結區塊 -->
+        <div class="space-y-4">
+            <!-- GitHub 連結 -->
+            <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" class="link-button flex items-center justify-between bg-gray-800 bg-opacity-50 border border-gray-700 rounded-xl p-4 transition-all duration-300 hover:bg-gray-700 hover:border-gray-600 hover:scale-105">
+                <span class="link-text text-lg font-semibold text-white transition-transform duration-300">GitHub</span>
+                <!-- GitHub SVG Icon -->
+                <svg class="link-icon w-6 h-6 text-white transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.418 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.867-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.465-1.11-1.465-.908-.618.069-.606.069-.606 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.64.359-1.088.653-1.336-2.22-.251-4.555-1.107-4.555-4.914 0-1.087.389-1.979 1.029-2.671-.103-.252-.446-1.265.098-2.636 0 0 .84-.266 2.75 1.025A9.642 9.642 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.291 2.747-1.025 2.747-1.025.546 1.371.202 2.384.098 2.636.64.692 1.029 1.584 1.029 2.671 0 3.819-2.339 4.664-4.569 4.914.359.308.678.917.678 1.846 0 1.336-.012 2.41-.012 2.74 0 .267.182.576.687.483C21.139 20.2 24 16.43 24 12.017 24 6.484 19.522 2 14 2z" clip-rule="evenodd" />
+                </svg>
+            </a>
+
+            <!-- Email 連結 -->
+            <a href="mailto:your.email@example.com" class="link-button flex items-center justify-between bg-gray-800 bg-opacity-50 border border-gray-700 rounded-xl p-4 transition-all duration-300 hover:bg-gray-700 hover:border-gray-600 hover:scale-105">
+                <span class="link-text text-lg font-semibold text-white transition-transform duration-300">Email</span>
+                <!-- Email SVG Icon -->
+                <svg class="link-icon w-6 h-6 text-white transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+            </a>
+
+            <!-- LinkedIn 連結 -->
+            <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" class="link-button flex items-center justify-between bg-gray-800 bg-opacity-50 border border-gray-700 rounded-xl p-4 transition-all duration-300 hover:bg-gray-700 hover:border-gray-600 hover:scale-105">
+                <span class="link-text text-lg font-semibold text-white transition-transform duration-300">LinkedIn</span>
+                <!-- LinkedIn SVG Icon -->
+                <svg class="link-icon w-6 h-6 text-white transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M19.98 1.002a2.02 2.02 0 00-2.02-2.02H6.04a2.02 2.02 0 00-2.02 2.02v17.96a2.02 2.02 0 002.02 2.02h11.92a2.02 2.02 0 002.02-2.02V1.002zM15 15.18v-4.14c0-2.06-1.55-3.32-3.66-3.32-1.78 0-2.91.99-3.41 1.56V8.18H5.98v10.82h3.33v-5.46c0-.3.02-.6.04-.9a2.36 2.36 0 012.35-2.94c1.67 0 2.33 1.28 2.33 3.16v5.14h3.33zM7.65 6.27c-1.12 0-1.85-.77-1.85-1.72s.73-1.72 1.85-1.72c1.12 0 1.85.77 1.85 1.72s-.73 1.72-1.85 1.72z" />
+                </svg>
+            </a>
+
+            <!-- 作品集連結 -->
+            <button onclick="togglePortfolio()" class="link-button w-full flex items-center justify-between bg-gray-800 bg-opacity-50 border border-gray-700 rounded-xl p-4 transition-all duration-300 hover:bg-gray-700 hover:border-gray-600 hover:scale-105 focus:outline-none">
+                <span class="link-text text-lg font-semibold text-white transition-transform duration-300">作品集</span>
+                <svg class="link-icon w-6 h-6 text-white transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 16V6c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2zm-2 0H5V6h14v10z"></path>
+                    <path d="M11 12.001a1 1 0 00-1 1v2a1 1 0 002 0v-2a1 1 0 00-1-1zm4.003-.001a1 1 0 00-1 1v2a1 1 0 002 0v-2a1 1 0 00-1-1zM7 12.001a1 1 0 00-1 1v2a1 1 0 002 0v-2a1 1 0 00-1-1z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 作品集容器 (初始為隱藏) -->
+    <div id="portfolio-container" class="main-container w-full max-w-sm mx-auto bg-gray-900 bg-opacity-70 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-2xl border border-gray-700 hidden mt-4">
+        <h2 class="text-2xl font-bold text-white mb-4 text-center">我的作品</h2>
+        <p class="text-gray-400 text-sm md:text-base text-center mb-6">以下是我的個人作品，展示我的技術與成果。</p>
+
+        <!-- 作品項目1 -->
+        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-4 mb-4 transition-all duration-300 hover:bg-gray-700 hover:border-gray-600">
+            <h3 class="text-lg font-semibold text-white">量化交易自動化平台</h3>
+            <p class="text-gray-400 text-sm mt-1">使用 Python, Pandas 和 API 建立的交易策略自動化工具。實現了數據分析、回測與實時交易。</p>
+            <a href="#" class="text-blue-400 hover:text-blue-300 text-sm mt-2 inline-block">了解更多 &rarr;</a>
+        </div>
+        
+        <!-- 作品項目2 -->
+        <div class="bg-gray-800 bg-opacity-50 rounded-xl p-4 mb-4 transition-all duration-300 hover:bg-gray-700 hover:border-gray-600">
+            <h3 class="text-lg font-semibold text-white">智慧家庭自動化系統</h3>
+            <p class="text-gray-400 text-sm mt-1">結合 IoT 裝置與機器學習模型，開發的智慧家庭自動化系統，可根據用戶行為自動調整環境。</p>
+            <a href="#" class="text-blue-400 hover:text-blue-300 text-sm mt-2 inline-block">了解更多 &rarr;</a>
+        </div>
+
+        <!-- 更多作品項目 -->
+        <p class="text-gray-500 text-sm text-center mt-6">... 您可以在此新增更多作品 ...</p>
+        
+        <button onclick="togglePortfolio()" class="link-button w-full flex items-center justify-center bg-gray-800 bg-opacity-50 border border-gray-700 rounded-xl p-4 transition-all duration-300 hover:bg-gray-700 hover:border-gray-600 hover:scale-105 focus:outline-none mt-4">
+            <span class="link-text text-lg font-semibold text-white transition-transform duration-300">返回</span>
+        </button>
+    </div>
+
+    <!-- 引入 Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer, line, geometry, material;
+        const numPoints = 200;
+        const vertexShader = `
+            attribute vec3 position;
+            attribute vec3 color;
+            uniform mat4 projectionMatrix;
+            uniform mat4 modelViewMatrix;
+            varying vec3 vColor;
+            void main() {
+                vColor = color;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+
+        const fragmentShader = `
+            precision mediump float;
+            varying vec3 vColor;
+            void main() {
+                gl_FragColor = vec4(vColor, 1.0);
+            }
+        `;
+
+        function init() {
+            scene = new THREE.Scene();
+            
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 200;
+
+            const canvas = document.getElementById('bg-canvas');
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(numPoints * 3);
+            const colors = new Float32Array(numPoints * 3);
+            for (let i = 0; i < numPoints; i++) {
+                positions[i * 3] = (i - numPoints / 2) * 2;
+                positions[i * 3 + 1] = 0;
+                positions[i * 3 + 2] = 0;
+                
+                // Initial colors for the setup
+                const color = new THREE.Color();
+                color.setHSL(0.6, 0.8, 0.5); // A default blue-purple tone
+                colors[i * 3] = color.r;
+                colors[i * 3 + 1] = color.g;
+                colors[i * 3 + 2] = color.b;
+            }
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            material = new THREE.ShaderMaterial({
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                transparent: true,
+                opacity: 0.8,
+                uniforms: {
+                    time: { value: 0.0 }
+                }
+            });
+
+            line = new THREE.Line(geometry, material);
+            scene.add(line);
+
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const positions = geometry.attributes.position.array;
+            const colors = geometry.attributes.color.array;
+            const time = performance.now() * 0.001;
+
+            for (let i = 0; i < numPoints; i++) {
+                const yOffset = Math.sin(i * 0.2 + time) * 30 * (Math.sin(time * 0.5) * 0.5 + 1);
+                positions[i * 3 + 1] = yOffset;
+
+                // 多樣化色彩邏輯
+                const r = Math.sin(i * 0.1 + time * 0.5) * 0.5 + 0.5;
+                const g = Math.cos(i * 0.05 + time * 0.4) * 0.5 + 0.5;
+                const b = Math.sin(i * 0.2 + time * 0.6) * 0.5 + 0.5;
+                
+                colors[i * 3] = r;
+                colors[i * 3 + 1] = g;
+                colors[i * 3 + 2] = b;
+            }
+            geometry.attributes.position.needsUpdate = true;
+            geometry.attributes.color.needsUpdate = true;
+
+            renderer.render(scene, camera);
+        }
+        
+        window.onload = function() {
+            init();
+            animate();
+        };
+
+        function togglePortfolio() {
+            const mainContainer = document.querySelector('.main-container');
+            const portfolioContainer = document.getElementById('portfolio-container');
+
+            if (portfolioContainer.classList.contains('hidden')) {
+                mainContainer.classList.add('hidden');
+                portfolioContainer.classList.remove('hidden');
+            } else {
+                mainContainer.classList.remove('hidden');
+                portfolioContainer.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
